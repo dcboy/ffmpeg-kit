@@ -289,7 +289,8 @@ for library in {1..58}; do
       CONFIGURE_POSTFIX+=" --enable-zlib"
       ;;
     android-media-codec)
-      CONFIGURE_POSTFIX+=" --enable-mediacodec"
+      # CONFIGURE_POSTFIX+=" --enable-mediacodec"
+      CONFIGURE_POSTFIX+=" --enable-hlmediacodec"
       ;;
     esac
   else
@@ -369,11 +370,11 @@ if [[ ${NO_FFMPEG_KIT_PROTOCOLS} == "1" ]]; then
   ${SED_INLINE} "s/ av_set_fd_close/\/\/av_set_fd_close/g" "${BASEDIR}"/android/ffmpeg-kit-android-lib/src/main/cpp/ffmpegkit.c 1>>"${BASEDIR}"/build.log 2>&1
   echo -e "\nINFO: Disabled custom ffmpeg-kit protocols\n" 1>>"${BASEDIR}"/build.log 2>&1
 else
-  cat ../../tools/protocols/libavformat_file.c >> libavformat/file.c
-  cat ../../tools/protocols/libavutil_file.h >> libavutil/file.h
-  cat ../../tools/protocols/libavutil_file.c >> libavutil/file.c
-  awk '{gsub(/ff_file_protocol;/,"ff_file_protocol;\nextern const URLProtocol ff_saf_protocol;")}1' libavformat/protocols.c > libavformat/protocols.c.tmp
-  awk '{gsub(/ff_file_protocol;/,"ff_file_protocol;\nextern const URLProtocol ff_fd_protocol;")}1' libavformat/protocols.c.tmp > libavformat/protocols.c
+  cat ../../tools/protocols/libavformat_file.c >>libavformat/file.c
+  cat ../../tools/protocols/libavutil_file.h >>libavutil/file.h
+  cat ../../tools/protocols/libavutil_file.c >>libavutil/file.c
+  awk '{gsub(/ff_file_protocol;/,"ff_file_protocol;\nextern const URLProtocol ff_saf_protocol;")}1' libavformat/protocols.c >libavformat/protocols.c.tmp
+  awk '{gsub(/ff_file_protocol;/,"ff_file_protocol;\nextern const URLProtocol ff_fd_protocol;")}1' libavformat/protocols.c.tmp >libavformat/protocols.c
   echo -e "\nINFO: Enabled custom ffmpeg-kit protocols\n" 1>>"${BASEDIR}"/build.log 2>&1
 fi
 

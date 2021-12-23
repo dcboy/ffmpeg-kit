@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# remove last build.log
+rm -rf build.log
+
 if [[ -z ${ANDROID_SDK_ROOT} ]]; then
   echo -e "\n(*) ANDROID_SDK_ROOT not defined\n"
   exit 1
@@ -297,7 +300,7 @@ if [[ -n ${ANDROID_ARCHITECTURES} ]]; then
   # BUILD NATIVE LIBRARY
   if [[ ${SKIP_ffmpeg_kit} -ne 1 ]]; then
     if [ "$(is_darwin_arm64)" == "1" ]; then
-       arch -x86_64 "${ANDROID_NDK_ROOT}"/ndk-build -B 1>>"${BASEDIR}"/build.log 2>&1
+      arch -x86_64 "${ANDROID_NDK_ROOT}"/ndk-build -B 1>>"${BASEDIR}"/build.log 2>&1
     else
       "${ANDROID_NDK_ROOT}"/ndk-build -B 1>>"${BASEDIR}"/build.log 2>&1
     fi
