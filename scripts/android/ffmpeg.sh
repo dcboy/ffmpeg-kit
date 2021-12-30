@@ -290,7 +290,7 @@ for library in {1..58}; do
       ;;
     android-media-codec)
       # CONFIGURE_POSTFIX+=" --enable-mediacodec"
-      CONFIGURE_POSTFIX+=" --enable-hlmediacodec"
+      # CONFIGURE_POSTFIX+=" --enable-hlmediacodec"
       ;;
     esac
   else
@@ -315,7 +315,8 @@ if [[ -n ${FFMPEG_KIT_LTS_BUILD} ]] && [[ ${API} -lt 18 ]]; then
 fi
 
 # ALWAYS BUILD SHARED LIBRARIES
-BUILD_LIBRARY_OPTIONS="--disable-static --enable-shared"
+# BUILD_LIBRARY_OPTIONS="--disable-static --enable-shared"
+BUILD_LIBRARY_OPTIONS=""
 
 # OPTIMIZE FOR SPEED INSTEAD OF SIZE
 if [[ -z ${FFMPEG_KIT_OPTIMIZED_FOR_SPEED} ]]; then
@@ -402,6 +403,7 @@ fi
   --enable-optimizations \
   --enable-swscale \
   ${BUILD_LIBRARY_OPTIONS} \
+  --enable-hlmediacodec \
   --enable-v4l2-m2m \
   --disable-outdev=fbdev \
   --disable-indev=fbdev \
@@ -410,7 +412,7 @@ fi
   --disable-xmm-clobber-test \
   ${DEBUG_OPTIONS} \
   --disable-neon-clobber-test \
-  --disable-programs \
+  \
   --disable-postproc \
   --disable-doc \
   --disable-htmlpages \
@@ -435,7 +437,7 @@ fi
   --disable-nvenc \
   --disable-vaapi \
   --disable-vdpau \
-  ${CONFIGURE_POSTFIX} 1>>"${BASEDIR}"/build.log 2>&1
+  ${CONFIGURE_POSTFIX} 1>>"${BASEDIR}"/build.log 2>&1 # --disable-programs \
 
 if [[ $? -ne 0 ]]; then
   echo -e "failed\n\nSee build.log for details\n"
