@@ -315,8 +315,8 @@ if [[ -n ${FFMPEG_KIT_LTS_BUILD} ]] && [[ ${API} -lt 18 ]]; then
 fi
 
 # ALWAYS BUILD SHARED LIBRARIES
-# BUILD_LIBRARY_OPTIONS="--disable-static --enable-shared"
-BUILD_LIBRARY_OPTIONS=""
+BUILD_LIBRARY_OPTIONS="--disable-static --enable-shared"
+# BUILD_LIBRARY_OPTIONS=""
 
 # OPTIMIZE FOR SPEED INSTEAD OF SIZE
 if [[ -z ${FFMPEG_KIT_OPTIMIZED_FOR_SPEED} ]]; then
@@ -412,7 +412,7 @@ fi
   --disable-xmm-clobber-test \
   ${DEBUG_OPTIONS} \
   --disable-neon-clobber-test \
-  \
+  --disable-programs \
   --disable-postproc \
   --disable-doc \
   --disable-htmlpages \
@@ -437,7 +437,26 @@ fi
   --disable-nvenc \
   --disable-vaapi \
   --disable-vdpau \
-  ${CONFIGURE_POSTFIX} 1>>"${BASEDIR}"/build.log 2>&1 # --disable-programs \
+  --disable-decoders \
+  --enable-decoder=h264 \
+  --enable-decoder=mjpeg \
+  --enable-decoder=rawvideo \
+  --disable-encoders \
+  --enable-encoder=h264_hlmediacodec \
+  --enable-encoder=libx264 \
+  --disable-parsers \
+  --enable-parser=h264 \
+  --enable-parser=mjpeg \
+  --disable-demuxers \
+  --enable-demuxer=rtsp \
+  --enable-demuxer=mjpeg \
+  --enable-demuxer=rawvideo \
+  --disable-muxers \
+  --enable-muxer=mp4 \
+  --disable-protocols \
+  --enable-protocol=tcp \
+  --enable-protocol=file \
+  ${CONFIGURE_POSTFIX} 1>>"${BASEDIR}"/build.log 2>&1
 
 if [[ $? -ne 0 ]]; then
   echo -e "failed\n\nSee build.log for details\n"
