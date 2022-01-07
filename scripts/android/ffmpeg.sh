@@ -453,6 +453,7 @@ fi
   --enable-demuxer=rawvideo \
   --disable-muxers \
   --enable-muxer=mp4 \
+  --enable-muxer=avi \
   --disable-protocols \
   --enable-protocol=tcp \
   --enable-protocol=file \
