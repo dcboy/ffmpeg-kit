@@ -1,6 +1,19 @@
 name: tvos build scripts
 
-on: [ push, pull_request ]
+on:
+  push:
+    branches:
+      - development
+      - main
+    paths-ignore:
+      - '**/README.md'
+      - 'docs/**'
+  pull_request:
+    branches:
+      - main
+    paths-ignore:
+      - '**/README.md'
+      - 'docs/**'
 
 jobs:
   build-main-on-macos-bigsur:
@@ -8,7 +21,7 @@ jobs:
     runs-on: macos-11
     strategy:
       matrix:
-        xcode: [ '12.5.1', '13.0' ]
+        xcode: [ '12.5.1', '13.2.1' ]
     defaults:
       run:
         shell: bash
