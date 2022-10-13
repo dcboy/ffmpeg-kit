@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# delete old build.log
+rm -rf build.log
+
 if [[ -z ${ANDROID_SDK_ROOT} ]]; then
   echo -e "\n(*) ANDROID_SDK_ROOT not defined\n"
   exit 1
@@ -16,6 +19,7 @@ export FFMPEG_KIT_BUILD_TYPE="android"
 source "${BASEDIR}"/scripts/variable.sh
 source "${BASEDIR}"/scripts/function-${FFMPEG_KIT_BUILD_TYPE}.sh
 disabled_libraries=()
+mkdir -p "${BASEDIR}"/release
 
 # SET DEFAULTS SETTINGS
 enable_default_android_architectures
@@ -379,7 +383,7 @@ if [[ -n ${ANDROID_ARCHITECTURES} ]]; then
     FFMPEG_KIT_AAR="${BASEDIR}/prebuilt/$(get_aar_directory)/ffmpeg-kit"
     rm -rf "${FFMPEG_KIT_AAR}" 1>>"${BASEDIR}"/build.log 2>&1
     mkdir -p "${FFMPEG_KIT_AAR}" 1>>"${BASEDIR}"/build.log 2>&1
-    cp "${BASEDIR}"/android/ffmpeg-kit-android-lib/build/outputs/aar/ffmpeg-kit-release.aar "${FFMPEG_KIT_AAR}"/ffmpeg-kit.aar 1>>"${BASEDIR}"/build.log 2>&1
+    cp "${BASEDIR}"/android/ffmpeg-kit-android-lib/build/outputs/aar/ffmpeg-kit-release.aar "${BASEDIR}"/release/ffmpeg-kit-"$(date +%Y%m%d%H%M%S)".aar 1>>"${BASEDIR}"/build.log 2>&1
     if [ $? -ne 0 ]; then
       echo -e "failed\n"
       exit 1

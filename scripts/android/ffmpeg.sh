@@ -476,6 +476,7 @@ fi
   --enable-decoder=mjpeg \
   --enable-decoder=rawvideo \
   --disable-encoders \
+  --enable-hlmediacodec \
   --enable-encoder=libx264 \
   --disable-parsers \
   --enable-parser=h264 \
