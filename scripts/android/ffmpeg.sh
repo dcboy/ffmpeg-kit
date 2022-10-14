@@ -472,12 +472,13 @@ fi
   --disable-vaapi \
   --disable-vdpau \
   --disable-decoders \
+  --enable-hlmediacodec \
   --enable-decoder=h264 \
   --enable-decoder=mjpeg \
   --enable-decoder=rawvideo \
   --disable-encoders \
-  --enable-hlmediacodec \
   --enable-encoder=libx264 \
+  --enable-encoder=h264_hlmediacodec \
   --disable-parsers \
   --enable-parser=h264 \
   --enable-parser=mjpeg \
