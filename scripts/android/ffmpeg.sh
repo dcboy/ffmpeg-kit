@@ -471,13 +471,19 @@ fi
   --disable-nvenc \
   --disable-vaapi \
   --disable-vdpau \
-  --disable-decoders \
   --enable-hlmediacodec \
+  --disable-filters \
+  --enable-filter=drawtext \
+  --enable-filter=format \
+  --enable-filter=overlay \
+  --enable-filter=scale \
+  --enable-filter=pad \
+  --enable-filter=transpose \
+  --disable-decoders \
   --enable-decoder=h264 \
   --enable-decoder=mjpeg \
   --enable-decoder=rawvideo \
   --disable-encoders \
-  --enable-encoder=libx264 \
   --enable-encoder=h264_hlmediacodec \
   --disable-parsers \
   --enable-parser=h264 \
@@ -488,7 +494,10 @@ fi
   --enable-demuxer=rawvideo \
   --disable-muxers \
   --enable-muxer=mp4 \
-  --enable-muxer=avi \
+  --disable-bsfs \
+  --enable-bsf=h264_metadata \
+  --enable-bsf=h264_mp4toannexb \
+  --enable-bsf=h264_redundant_pps \
   --disable-protocols \
   --enable-protocol=tcp \
   --enable-protocol=file \
