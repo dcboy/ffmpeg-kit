@@ -471,6 +471,7 @@ fi
   --disable-nvenc \
   --disable-vaapi \
   --disable-vdpau \
+  --enable-mediacodec \
   --enable-hlmediacodec \
   --disable-filters \
   --enable-filter=drawtext \
@@ -480,6 +481,7 @@ fi
   --enable-filter=pad \
   --enable-filter=transpose \
   --disable-decoders \
+  --enable-decoder=h264_mediacodec \
   --enable-decoder=h264 \
   --enable-decoder=mjpeg \
   --enable-decoder=rawvideo \
