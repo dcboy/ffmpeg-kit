@@ -479,12 +479,15 @@ fi
   --enable-filter=scale \
   --enable-filter=pad \
   --enable-filter=transpose \
+  --enable-filter=xstack \
+  --enable-filter=setpts \
   --disable-decoders \
   --enable-decoder=h264 \
   --enable-decoder=mjpeg \
   --enable-decoder=rawvideo \
   --disable-encoders \
   --enable-encoder=h264_hlmediacodec \
+  --enable-encoder=h264_omx \
   --disable-parsers \
   --enable-parser=h264 \
   --enable-parser=mjpeg \
@@ -499,6 +502,7 @@ fi
   --enable-bsf=h264_mp4toannexb \
   --enable-bsf=h264_redundant_pps \
   --disable-protocols \
+  --enable-omx \
   --enable-protocol=tcp \
   --enable-protocol=file \
   ${CONFIGURE_POSTFIX} 1>>"${BASEDIR}"/build.log 2>&1
