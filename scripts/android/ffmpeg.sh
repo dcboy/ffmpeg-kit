@@ -404,11 +404,11 @@ if [[ ${NO_FFMPEG_KIT_PROTOCOLS} == "1" ]]; then
   ${SED_INLINE} "s| av_set_saf|//av_set_saf|g" "${BASEDIR}"/android/ffmpeg-kit-android-lib/src/main/cpp/ffmpegkit.c 1>>"${BASEDIR}"/build.log 2>&1
   echo -e "\nINFO: Disabled custom ffmpeg-kit protocols\n" 1>>"${BASEDIR}"/build.log 2>&1
 else
-  cat ../../tools/protocols/libavformat_file.c >> libavformat/file.c
-  cat ../../tools/protocols/libavutil_file.h >> libavutil/file.h
-  cat ../../tools/protocols/libavutil_file.c >> libavutil/file.c
-  awk '{gsub(/ff_file_protocol;/,"ff_file_protocol;\nextern const URLProtocol ff_saf_protocol;")}1' libavformat/protocols.c > libavformat/protocols.c.tmp
-  cat libavformat/protocols.c.tmp > libavformat/protocols.c
+  cat ../../tools/protocols/libavformat_file.c >>libavformat/file.c
+  cat ../../tools/protocols/libavutil_file.h >>libavutil/file.h
+  cat ../../tools/protocols/libavutil_file.c >>libavutil/file.c
+  awk '{gsub(/ff_file_protocol;/,"ff_file_protocol;\nextern const URLProtocol ff_saf_protocol;")}1' libavformat/protocols.c >libavformat/protocols.c.tmp
+  cat libavformat/protocols.c.tmp >libavformat/protocols.c
   echo -e "\nINFO: Enabled custom ffmpeg-kit protocols\n" 1>>"${BASEDIR}"/build.log 2>&1
 fi
 
@@ -495,6 +495,7 @@ fi
   --enable-demuxer=rtsp \
   --enable-demuxer=mjpeg \
   --enable-demuxer=rawvideo \
+  --enable-demuxer=concat \
   --disable-muxers \
   --enable-muxer=mp4 \
   --disable-bsfs \
@@ -503,6 +504,7 @@ fi
   --enable-bsf=h264_redundant_pps \
   --disable-protocols \
   --enable-omx \
+  --enable-protocol=concat \
   --enable-protocol=tcp \
   --enable-protocol=file \
   ${CONFIGURE_POSTFIX} 1>>"${BASEDIR}"/build.log 2>&1
